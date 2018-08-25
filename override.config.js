@@ -3,6 +3,8 @@ const envs = {
   development: "development"
 };
 
+const path = require("path");
+
 const fs = require("fs-extra");
 //ensure build directory is removed
 if (process.env.NODE_ENV === "production") {
@@ -17,7 +19,19 @@ const styleLoaders = env => {
   };
   let stylusLoader = {
     test: regexps.stylus,
-    use: ["style-loader", "css-loader", "stylus-loader"]
+    use: [
+      "style-loader",
+      "css-loader",
+      {
+        loader: "stylus-loader",
+        options: {
+          import: [
+            path.resolve(__dirname, "./src/stylus/vars.styl"),
+            path.resolve(__dirname, "./src/stylus/normallize.styl")
+          ]
+        }
+      }
+    ]
   };
   let cssLoader = {
     test: regexps.css
@@ -47,7 +61,7 @@ function multiPageConfig(config) {
   //create new entry
   config.entry = {
     app1: [...config.entry, "./src/index.1.js"],
-    app: [...config.entry, "./src/index.js"]
+    app: [...config.entry, "./src/router.js"]
   };
   //change output filename,which  default is `static/js/bundle.js`,
   // webpack.config.dev.js of `react-scripts`,
@@ -95,5 +109,7 @@ module.exports = {
   paths(paths) {
     return paths;
   },
-  devServer: {}
+  devServer: {
+        before:require("./api")
+  }
 };
