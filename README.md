@@ -1,7 +1,7 @@
 # React ZhihuDaily - React 知乎日报
 
 ```javascript
-react + dva;
+react + dva + react-scriptx;
 ```
 
 <a href="https://github.com/Fi2zz/Vue-ZhihuDaily"> Vue 版本知乎日报</a>
