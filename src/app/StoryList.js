@@ -102,4 +102,4 @@ class StoryListComponent extends React.Component {
     );
   }
 }
-export default connect(app => app)(StoryListComponent);
+export const StoryList= connect(app => app)(StoryListComponent);
