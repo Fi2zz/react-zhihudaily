@@ -1,6 +1,6 @@
 import React from "react";
 import { Router, Route, Switch } from "dva/router";
-import StoryList from "./app/StoryList";
+import {StoryList} from "./app/StoryList";
 import { Story } from "./app/Story";
 import { StoryComments } from "./app/StoryComments";
 export default function({ history }) {
