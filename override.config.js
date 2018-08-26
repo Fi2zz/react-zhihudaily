@@ -110,6 +110,6 @@ module.exports = {
     return paths;
   },
   devServer: {
-        before:require("./api")
+    before: require("./api")
   }
 };

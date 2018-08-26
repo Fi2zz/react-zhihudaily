@@ -11,8 +11,7 @@ export default function({ history }) {
         <Route exact path="/:id" namespace="app" component={Story} />
         <Route
           exact
-          path="/:id/comment"
-          namespace="app"
+          path="/:id/comments"
           component={StoryComments}
         />
       </Switch>
