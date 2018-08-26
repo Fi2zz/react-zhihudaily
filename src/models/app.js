@@ -168,8 +168,6 @@ export default {
     }
   },
   subscriptions: {
-    setup({ dispatch }) {
-      dispatch({ type: "getStories" });
-    }
+    setup({ dispatch }) {}
   }
 };

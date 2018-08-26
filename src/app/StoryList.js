@@ -16,6 +16,7 @@ class StoryListComponent extends React.Component {
   };
 
   componentDidMount() {
+    this.props.dispatch({ type: "app/getStories" });
     window.addEventListener("scroll", this.getScrollState.bind(this), false);
   }
 
@@ -48,6 +49,7 @@ class StoryListComponent extends React.Component {
       dispatch({
         type: "app/getLastDateStories"
       });
+
       this.setState({ scrollPosition: scrollTop });
     }
   }
@@ -63,10 +65,6 @@ class StoryListComponent extends React.Component {
       dispatch({
         type: "app/goTo",
         route: `/${id}`
-      });
-      dispatch({
-        type: "app/getStory",
-        id: id
       });
     };
     return (
@@ -85,7 +83,9 @@ class StoryListComponent extends React.Component {
                 >
                   <h3 className="list-group-item-title">{item.title}</h3>
                   <div className="list-group-item-image">
-                    <div className="list-group-item-cover" style={item.style} />
+                    <div className="list-group-item-cover" style={item.style}>
+                      {item.multipic && <span>多图</span>}
+                    </div>
                   </div>
                 </li>
               );
