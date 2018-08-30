@@ -6,7 +6,6 @@ function Loading({ loading }) {
   if (!loading) {
     return null;
   }
-
   return <div className="loading">加载中</div>;
 }
 
@@ -28,7 +27,6 @@ class StoryListComponent extends React.Component {
     let listHeader = Array.prototype.slice.call(
       document.querySelectorAll("ol .list-group-item-header")
     );
-
     const { app, dispatch } = this.props;
     if (listHeader.length <= 0) {
       return;
@@ -38,9 +36,7 @@ class StoryListComponent extends React.Component {
     if (activeDate === lastStory.date) {
       return false;
     }
-
     let lastListHeader = listHeader.pop();
-
     let scrollTop = window.scrollY;
     let scrollDown = scrollTop > this.state.scrollPosition;
     let rect = lastListHeader.getBoundingClientRect();
@@ -49,7 +45,6 @@ class StoryListComponent extends React.Component {
       dispatch({
         type: "app/getLastDateStories"
       });
-
       this.setState({ scrollPosition: scrollTop });
     }
   }
@@ -57,7 +52,6 @@ class StoryListComponent extends React.Component {
   render() {
     const { app, dispatch } = this.props;
     const { stories } = app;
-
     const viewStory = id => {
       dispatch({
         type: "app/resetStoryView"
