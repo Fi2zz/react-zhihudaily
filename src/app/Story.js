@@ -6,14 +6,12 @@ class StoryView extends React.Component {
   componentDidMount() {
     this.getStory();
   }
-
   getStory() {
     this.props.dispatch({
       type: "app/getStory",
       id: this.props.match.params.id
     });
   }
-
   goTo(route) {
     this.props.dispatch({
       type: "app/goTo",
