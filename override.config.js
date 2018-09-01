@@ -91,20 +91,21 @@ function multiPageConfig(config) {
 
 module.exports = {
   webpack(config, paths, env) {
-    if (env === envs.production) {
-      config.devtool = false;
-    }
+    //cra use oneOf rules
+    let oneOf = config.module.rules.pop().oneOf;
+    // if you need use babelrc file
 
+    // let babelLoader = oneOf[1];
+    // babelLoader.options.babelrc = true;
+
+    //styles loaders
     //delete default  loaders, which to handler styles, we can
+
     //add our styles loaders,like: sass-loader,stylus-loader
     config.module.rules.push({
-      oneOf: styleLoaders(env).concat(
-        config.module.rules.pop().oneOf.filter(item => !item.use)
-      )
+      oneOf: styleLoaders(env).concat(oneOf.filter(item => !item.use))
     });
-
     return config;
-    // return { ...multiPageConfig(config), ...config };
   },
   paths(paths) {
     return paths;

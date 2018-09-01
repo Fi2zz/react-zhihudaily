@@ -1,13 +1,7 @@
 import React from "react";
 import { connect } from "dva";
 import { ReactSwiper } from "../component/Swiper";
-
-function Loading({ loading }) {
-  if (!loading) {
-    return null;
-  }
-  return <div className="loading">加载中</div>;
-}
+import Loading from "../component/Loading";
 
 class StoryListComponent extends React.Component {
   state = {
@@ -24,28 +18,34 @@ class StoryListComponent extends React.Component {
   }
 
   getScrollState() {
-    let listHeader = Array.prototype.slice.call(
+    const listHeader = Array.prototype.slice.call(
       document.querySelectorAll("ol .list-group-item-header")
     );
-    const { app, dispatch } = this.props;
     if (listHeader.length <= 0) {
       return;
     }
-    let lastStory = app.stories.filter(item => item.type === "separator").pop();
-    let activeDate = app.activeDate;
-    if (activeDate === lastStory.date) {
+    const lastListHeader = listHeader.pop();
+    const scrollTop = window.scrollY;
+    const scrollDown = scrollTop > this.state.scrollPosition;
+    const { app, dispatch } = this.props;
+    const lastStory = app.stories
+      .filter(item => item.type === "separator")
+      .pop();
+
+    //to prevent load same date data again
+    if (app.activeDate === lastStory.date) {
       return false;
     }
-    let lastListHeader = listHeader.pop();
-    let scrollTop = window.scrollY;
-    let scrollDown = scrollTop > this.state.scrollPosition;
-    let rect = lastListHeader.getBoundingClientRect();
-    let top = parseInt(rect.top, 10);
+
+    const rect = lastListHeader.getBoundingClientRect();
+    const top = parseInt(rect.top, 10);
+
     if (scrollDown && top <= 44 && !app.loading) {
-      dispatch({
-        type: "app/getLastDateStories"
+      this.setState({ scrollPosition: scrollTop }, () => {
+        dispatch({
+          type: "app/getLastDateStories"
+        });
       });
-      this.setState({ scrollPosition: scrollTop });
     }
   }
 
@@ -54,15 +54,17 @@ class StoryListComponent extends React.Component {
     const { stories } = app;
     const viewStory = id => {
       dispatch({
-        type: "app/resetStoryView"
-      });
-      dispatch({
         type: "app/goTo",
         route: `/${id}`
+      }).then(() => {
+        dispatch({
+          type: "app/resetStoryView"
+        });
       });
     };
     return (
       <div className="view story-list">
+        <Loading className={"story-list"} />
         <div className="story-swiper">
           <ReactSwiper swipes={app.tops} />
         </div>
@@ -91,7 +93,6 @@ class StoryListComponent extends React.Component {
             );
           })}
         </ol>
-        <Loading loading={app.loading} />
       </div>
     );
   }

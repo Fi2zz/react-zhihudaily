@@ -6,7 +6,6 @@
     "dva": "^2.4.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
-    "react-router": "^4.3.1",
     "react-scripts": "1.1.5",
     "react-scriptx": "1.4.0",
     "stylus": "^0.54.5",
@@ -17,7 +16,6 @@
     "start": "react-scriptx && react-scripts start",
     "build": "react-scriptx && react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "x": "react-scriptx"
+    "eject": "react-scripts eject"
   }
 }

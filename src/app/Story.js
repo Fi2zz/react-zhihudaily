@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "dva";
+import Loading from "../component/Loading";
 
 class StoryView extends React.Component {
   componentDidMount() {
@@ -24,6 +25,7 @@ class StoryView extends React.Component {
     const { info, id, content: html } = app.story;
     return (
       <div className="view story">
+        <Loading className="story" />
         <div dangerouslySetInnerHTML={{ __html: html }} />
         <div className="story-action">
           <ul className="story-action-list">

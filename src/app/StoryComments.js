@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "dva";
 
+import Loading from "../component/Loading";
+
 class StoryCommentsComponent extends React.Component {
   componentDidMount() {
     const { match, dispatch } = this.props;
@@ -16,7 +18,8 @@ class StoryCommentsComponent extends React.Component {
     const info = app.story.info;
     const comments = app.comments;
     return (
-      <div className="comments">
+      <div className="view comments">
+        <Loading className="story-comment" />
         <div className="view-header">
           <div className="view-header-wrap">
             {info.total}
