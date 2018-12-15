@@ -50,7 +50,8 @@ const effects = {
             })
         );
     },
-    * resetStoryView(action) {
+    *viewStory({payload}){
+
         yield put(
             createAction("updateState")({
                 story: {
@@ -61,6 +62,13 @@ const effects = {
                 loading:true
             })
         );
+
+        yield put({
+            type:"goTo",
+            route:payload.route
+        })
+
+
     },
     * getStory({id}) {
         yield put({

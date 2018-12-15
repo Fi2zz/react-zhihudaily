@@ -60,15 +60,12 @@ class StoryListComponent extends React.Component {
 
         const viewStory = id => {
             dispatch({
-                type: "resetStoryView"
+                type: "viewStory",
+                payload:{
+                    route:`/${id}`
+                }
             })
 
-            .then(()=>{
-              dispatch({
-                type: "goTo",
-                route: `/${id}`
-            })
-        })
 
         
         };
