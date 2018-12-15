@@ -1,8 +1,5 @@
 import React from "react";
-
-
-
-function Loading({className,loading}){
+export default function Loading({className,loading}){
   let nodeClassName = "loading";
   if (!loading) {
     return null;
@@ -13,4 +10,3 @@ function Loading({className,loading}){
   return <div className={nodeClassName}>加载中...</div>;
 }
 
-export default Loading

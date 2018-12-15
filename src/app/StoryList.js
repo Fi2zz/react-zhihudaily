@@ -7,9 +7,13 @@ class StoryListComponent extends React.Component {
     state = {
         scrollPosition: 0
     };
+    constructor(props){
+
+        super(props)
+        this.props.dispatch({type: "getStories"});
+    }
 
     componentDidMount() {
-        this.props.dispatch({type: "getStories"});
         window.addEventListener("scroll", this.getScrollState.bind(this), false);
     }
 

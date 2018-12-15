@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 import Loading from "../component/Loading";
 
 class StoryCommentsComponent extends React.Component {
-  componentDidMount() {
+  constructor(props) {
+    super(props)
     const { match, dispatch } = this.props;
     const id = match.params.id;
     dispatch({
