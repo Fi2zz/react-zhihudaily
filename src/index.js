@@ -1,21 +1,8 @@
 import "./stylus/app.styl";
-import dva from "./dva";
-import router from "./router";
+import React from 'react'
+import ReactDOM from 'react-dom'
 import registerServiceWorker from "./registerServiceWorker";
-import { browserHistory } from "dva/router";
-import appModel from "./models/app";
+import App from './App'
 
-const app = dva(
-  {
-    history: browserHistory
-  },
-  {
-    router,
-    models: {
-      appModel
-    }
-  }
-);
-app.start("#root");
-
+ReactDOM.render(<App/>, document.getElementById('root'))
 registerServiceWorker();

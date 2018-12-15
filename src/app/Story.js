@@ -1,5 +1,5 @@
 import React from "react";
-import { connect } from "dva";
+import { connect } from "react-redux";
 import Loading from "../component/Loading";
 
 class StoryView extends React.Component {
@@ -8,13 +8,13 @@ class StoryView extends React.Component {
   }
   getStory() {
     this.props.dispatch({
-      type: "app/getStory",
+      type: "getStory",
       id: this.props.match.params.id
     });
   }
   goTo(route) {
     this.props.dispatch({
-      type: "app/goTo",
+      type: "goTo",
       route
     });
   }

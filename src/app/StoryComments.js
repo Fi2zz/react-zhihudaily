@@ -1,5 +1,5 @@
 import React from "react";
-import { connect } from "dva";
+import { connect } from "react-redux";
 
 import Loading from "../component/Loading";
 
@@ -8,7 +8,7 @@ class StoryCommentsComponent extends React.Component {
     const { match, dispatch } = this.props;
     const id = match.params.id;
     dispatch({
-      type: "app/getComments",
+      type: "getComments",
       id
     });
   }
