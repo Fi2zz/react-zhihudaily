@@ -52,24 +52,25 @@ class StoryListComponent extends React.Component {
     render() {
 
         let {app, dispatch} = this.props;
-        const {stories} = app;
-        // console.log(dispatch)
+        const {stories,loading} = app;
 
         const viewStory = id => {
+            dispatch({
+                type: "resetStoryView"
+            })
+
+            .then(()=>{
               dispatch({
                 type: "goTo",
                 route: `/${id}`
             })
-            .then(() => {
-                dispatch({
-                    type: "resetStoryView"
-                });
-            });
+        })
 
+        
         };
         return (
             <div className="view story-list">
-                <Loading className={"story-list"}/>
+                <Loading className={"story-list"} loading={loading}/>
                 <div className="story-swiper">
                     <ReactSwiper swipes={app.tops}/>
                 </div>

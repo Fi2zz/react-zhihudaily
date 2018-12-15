@@ -3,10 +3,10 @@ import { connect } from "react-redux";
 import Loading from "../component/Loading";
 
 class StoryView extends React.Component {
-  componentDidMount() {
-    this.getStory();
-  }
-  getStory() {
+  constructor(props) {
+
+    super(props)
+
     this.props.dispatch({
       type: "getStory",
       id: this.props.match.params.id
@@ -20,10 +20,11 @@ class StoryView extends React.Component {
   }
   render() {
     const { app } = this.props;
-    const { info, id, content: html } = app.story;
+    const {loading,story}=app;
+    const { info, id, content: html } = story;
     return (
       <div className="view story">
-        <Loading className="story" />
+        <Loading className="story" loading={loading} />
         <div dangerouslySetInnerHTML={{ __html: html }} />
         <div className="story-action">
           <ul className="story-action-list">
@@ -54,4 +55,4 @@ class StoryView extends React.Component {
     );
   }
 }
-export const Story = connect(app => app)(StoryView);
+export const Story = connect(state => state)(StoryView);

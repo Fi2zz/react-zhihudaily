@@ -57,12 +57,16 @@ const effects = {
                     id: null,
                     content: null,
                     info: createStoryInfoState()
-                }
+                },
+                loading:true
             })
         );
     },
     * getStory({id}) {
-        yield put(createAction("updateState")({loading: true}));
+        yield put({
+            type:"loading",
+            loading:true
+        });
         let result = yield call(get, "story", id);
         let info = yield call(get, "storyInfo", id);
 
