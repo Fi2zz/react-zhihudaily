@@ -1,5 +1,5 @@
 let http = require("http");
-const chalk=require("chalk")
+const chalk = require("chalk");
 const headers = {
   "Content-Type": "application/json",
   "User-Agent":
@@ -30,7 +30,7 @@ function request(url) {
 
 module.exports = function api(app) {
   app.get(/^\/api/, (req, res) => {
-    console.log(chalk.green("[api]"+req.url));
+    console.log(chalk.green("[api]" + req.url));
     function reponse(response) {
       let parse;
       try {

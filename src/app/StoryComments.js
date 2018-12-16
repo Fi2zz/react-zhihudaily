@@ -5,8 +5,8 @@ import Loading from "../component/Loading";
 
 class StoryCommentsComponent extends React.Component {
   constructor(props) {
-    super(props)
-    const { match, dispatch } = this.props;
+    super(props);
+    const { match, dispatch } = props;
     const id = match.params.id;
     dispatch({
       type: "getComments",

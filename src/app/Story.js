@@ -4,7 +4,7 @@ import Loading from "../component/Loading";
 
 class StoryView extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.props.dispatch({
       type: "getStory",
       id: this.props.match.params.id
@@ -18,7 +18,7 @@ class StoryView extends React.Component {
   }
   render() {
     const { app } = this.props;
-    const {loading,story}=app;
+    const { loading, story } = app;
     const { info, id, content: html } = story;
     return (
       <div className="view story">
