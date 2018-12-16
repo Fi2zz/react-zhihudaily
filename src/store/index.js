@@ -1,40 +1,45 @@
-import {reducerWithInitialState} from './reducer'
 import {
-    now,
-    createStoryInfoState
+  now
 } from "../utils";
-import {rootSaga as saga, sagaMiddleware, effectList,} from './saga'
-import {Store} from './store'
-import {dispatchWithPromise} from './dispatchWithPromiseMiddleware'
-
-import {createBrowserHistory} from 'history'
-const state = {
-    story: {
+import { createStoryInfoState } from "../helpers";
+import { rootSaga as saga, sagaMiddleware, effectList, dispatchWithPromise } from "./saga";
+import { Store } from "./store";
+export default   new Store({
+    state: {
+      story: {
         id: null,
         content: "",
         info: createStoryInfoState()
+      },
+      stories: [],
+      tops: [],
+      comments: [],
+      loading: true,
+      activeDate: now()
     },
-    stories: [],
-    tops: [],
-    comments: [],
-    loading: true,
-    activeDate: now()
-};
-export const store =
-    new Store({
-        state,
-        reducers: {
-            app: reducerWithInitialState
-        },
-        middlewares: [
-            sagaMiddleware,
-            dispatchWithPromise(effectList.map(item => item.name))
-        ]
-    });
-sagaMiddleware.run(saga);
+    reducers: {
+      app: iniState => (state = iniState, { type, payload }) => {
+        switch (type) {
+          case  "updateState":
+            return {
+              ...state,
+              ...payload
+            };
+          default:
+            return state;
+        }
 
-export const history = createBrowserHistory();
-
-
+      }
+    },
+    middlewares: [
+      sagaMiddleware,
+      dispatchWithPromise(effectList.map(item => item.name))
+    ],
+    afterApplyMiddleware: {
+      saga() {
+        sagaMiddleware.run(saga);
+      }
+    }
+  });
 
 
